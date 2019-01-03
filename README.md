@@ -25,6 +25,8 @@ app.stat.track(eventCode, params)
 
 - show_log： 设置true，会在控制台打logger，显示发送的数据。设置false表示不显示。默认为true
 
+- getLocation: 设置为true时，会在用户打开小程序时申请授权获取用户位置信息。默认为false
+
 
 ## 3. Page中追踪自定义事件
 
@@ -33,6 +35,7 @@ app.stat.track(eventCode, params)
 `.track(eventName, eventValue)`
 
 通过`track`方式可以将埋点数据发送给后端，第一个参数为事件名，第二个参数为事件传回参数，要求为**对象**。对象内的值要求为数值、字符串、布尔值、日期或数组等类型。
+
 
 ```js
 const app = getApp()
@@ -69,16 +72,16 @@ app.stat.registerParam({
 | $WXMPLaunch   | App.onLaunch  | 小程序重新打开时会触发 | 只会在小程序初始化完成时触发一次 |
 | $WXMPShow     | App.onShow | 小程序启动或从后台进入前台时触发 | 启动小程序时 |
 | $WXMPHide     | App.onHide | 点击小程序右上角退出按钮、微信进入后台、进入小程序关于页面、手机锁屏、小程序进程被杀死时触发 | 小程序从前台进入后台 |
-| $WSMPViewScreen | Page.onShow | 小程序启动打开页面、从后台进入前台打开页面时触发 | 每次打开页面都会触发 |
+| $WXMPViewScreen | Page.onShow | 小程序启动打开页面、从后台进入前台打开页面时触发 | 每次打开页面都会触发 |
 
 可以在config.js中添加以下参数，开启预置事件自动采集。
 
 ```js
 autoTrack: {
-	appLaunch: true, //是否采集 $WXMPLaunch 事件，true 代表开启。
-   appShow: true, //是否采集 $WXMPShow 事件，true 代表开启。
-   appHide: true, //是否采集 $WXMPHide 事件，true 代表开启。
-   pageShow: true, //是否采集 $WXMPViewScreen 事件，true 代表开启。
+  appLaunch: true, //是否采集 $WXMPLaunch 事件，true 代表开启。
+  appShow: true, //是否采集 $WXMPShow 事件，true 代表开启。
+  appHide: true, //是否采集 $WXMPHide 事件，true 代表开启。
+  pageShow: true, //是否采集 $WXMPViewScreen 事件，true 代表开启。
 }
 ```
 
@@ -119,25 +122,49 @@ App({
 
 ```
 
+$brand: "devtools",
+    $country: '',
+    $province: '',
+    $city: '',
+    $nn: '', // nickName
+    $gd: '', // gender
+    $au: '', // avatarUrl
+
 ## 5. 预置属性
 
 | 预置字段名称   | 类型     | 说明          |
 | ------------- |:------ |:-------------:|
+| $event_name   | String  | 事件名称 |
+| $project_id   | String  | 项目ID |
 | $lib   | String  | SDK类型 |
 | $libVersion | String | SDK版本 |
 | $screenHeight  | Number | 小程序窗口高度 |
 | $screenWidth | Number | 小程序窗口宽度 |
+| $brand| String | 手机品牌 |
+| $nn| String | 微信昵称 |
+| $gd| String | 性别， 0：未知 1：男 2：女 |
+| $au| String | 用户头像链接 |
 | $model| String | 设备型号 |
 | $networkType| String| 网络类型 |
 | $os | String  |  操作系统  |
 | $osVersion | String  |  操作系统版本  |
+| $wxVersion | String  |  微信版本  |
 | $urlPath | String  |  页面路径   |
 | $isFirstDay | Bool | 是否首日访问   |
 | $latestScene | String   | 最近一次启动场景值   |
 | $isFirstTime | Bool  | 是否是首次访问，绘制appLaunch状态时触发返回   |
 | $scene | String  |  启动场景，会在appLaunch时触发返回  |
 | $eventDuration | Number  | 时长，触发appHide状态时返回   |
-| $referrer | String  | 前向页面地址，触发pageShow状态时返回   |
+| $latitude | Number  | 纬度，配置项中getLocation配置为true时返回   |
+| $longitude | Number  | 经度，配置项中getLocation配置为true时返回   |
+| $accuracy | Number  | 精确度，配置项中getLocation配置为true时返回   |
+| $speed | Number  | 速度，配置项中getLocation配置为true时返回   |
+| $country| String | 用户所属国家 |
+| $province| String | 用户所属省份 |
+| $city| String | 用户所属城市 |
+| $isDefaultTrack | Bool  | 预置事件会返回该字段，返回值为true   |
+| $distinct_id| String | 插件分配的唯一ID |
+| $type| String | 日志触发类型 |
 
 ## 6. 具体操作流程
 
