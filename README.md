@@ -49,14 +49,16 @@ app.stat.track('placeOrder', {
 
 #### 3.2 添加公用参数
 
-`.registerParam(param)`
+`.registerParams(param)`
 
-可以在小程序页面Page()执行前使用`registerParam`方法来注册事件公共参数，这样在后续的所有自定义事件中都会添加返回这些公共参数。
+可以在小程序页面Page()执行前使用`registerParams`方法来注册事件公共参数，这样在后续的所有自定义事件中都会添加返回这些公共参数。
+
+> 要求公共属性key值为数字、英文和下划线的组合，且要求以英文字母开头
 
 ```js
 const app = getApp()
-app.stat.registerParam({
-	userId: 123,
+app.stat.registerParams({
+	userId: 666,
 	userName: 'Super Mario',
 })
 ```

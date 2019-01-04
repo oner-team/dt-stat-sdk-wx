@@ -1,3 +1,7 @@
+#### 20190104
+
+- 所有公共属性的key值都要求增加`_`前缀，如果key的前缀为若干个`$`或者`_`符号都会统一替换为一个`_`作为前缀
+
 #### 20190103
 
 - 增加了多个关于用户信息的字段： nickName、avatarUrl、gender、country、province、city、brand。
