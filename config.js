@@ -1,6 +1,7 @@
 var conf = {
   // 分析注册在APP全局函数中的变量名，在非app.js中可以通过getApp().sensors(你这里定义的名字来使用)
   name: 'stat',
+  // 项目id
   project_id: '',
   // 如果要通过sdk自动获取openid，需要在分析中配置appid和appsercret，并在这里标志appid,不需要的话，不用填。
   appid: '',
@@ -24,7 +25,7 @@ var conf = {
     pageShow: true, //是否采集 $MPViewScreen 事件，true 代表开启。
     pageShare: true //是否采集 $MPShare 事件，true 代表开启。
   },
-  // 是否授权在小程序启动时采集用户的GPS信息
+  // 是否授权在小程序启动时采集用户的GPS信息，如果要求采集需要先请求登陆
   getLocation: true,
 };
 
